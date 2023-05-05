@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Role::create(['id' => Role::ROLE_PENDING, 'name' => 'PENDING']);
+        Role::create(['id' => Role::ROLE_PROCESSING, 'name' => 'PROCESSING']);
+        Role::create(['id' => Role::ROLE_CLOSED, 'name' => 'CLOSED']);
     }
 }
