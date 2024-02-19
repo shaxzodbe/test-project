@@ -14,20 +14,20 @@ class RegionSeeder extends Seeder
     public function run(): void
     {
         $regions = [
-          'Андижанская область',
-          'Бухарская область',
-          'Джизакская область',
-          'Кашкадарьинская область',
-          'Навоийская область',
-          'Наманганская область',
-          'Самаркандская область',
-          'Сурхандарьинская область',
-          'Сырдарьинская область',
-          'Ташкентская область',
-          'Ферганская область',
-          'Хорезмская область',
-          'Республика Каракалпакстан',
-          'Город Ташкент',
+          'Andijan Region',
+          'Bukhara Region',
+          'Fergana Region',
+          'Jizzakh Region',
+          'Khorezm Region',
+          'Namangan Region',
+          'Navoiy Region',
+          'Kashkadarya Region',
+          'Samarkand Region',
+          'Syrdarya Region',
+          'Surkhandarya Region',
+          'Tashkent Region',
+          'Republic of Karakalpakstan',
+          'Tashkent city',
         ];
 
         foreach ($regions as $region) {
