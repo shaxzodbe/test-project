@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class IndustriesChart extends ChartWidget
 {
-    protected static ?string $heading = 'Sphere Chart';
+    protected static ?string $heading = 'Activity Spheres Chart';
 
     protected function getData(): array
     {
