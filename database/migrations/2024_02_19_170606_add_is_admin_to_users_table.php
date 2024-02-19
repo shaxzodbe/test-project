@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->boolean('is_admin')->default(false); // Добавляет поле is_admin со значением по умолчанию false
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('is_admin'); // Удаляет поле при откате миграции
         });
     }
 };
