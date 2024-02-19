@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         User::factory(100)->create();
         $this->call(RegionSeeder::class);
         $this->call(ActivitySphereSeeder::class);
+        $this->call(InvestorSeeder::class);
     }
 }
