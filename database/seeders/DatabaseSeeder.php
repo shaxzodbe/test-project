@@ -13,6 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+          'name' => 'Admin',
+          'email' => 'admin@admin.com',
+          'password' => bcrypt('password'),
+          'email_verified_at' => now(),
+        ]);
         User::factory(100)->create();
         $this->call(RegionSeeder::class);
         $this->call(ActivitySphereSeeder::class);
