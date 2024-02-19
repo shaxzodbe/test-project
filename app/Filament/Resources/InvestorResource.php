@@ -35,8 +35,15 @@ class InvestorResource extends Resource
                 ->schema([
                   TextInput::make('project_name')
                     ->required(),
-                  TextInput::make('signed_agreements')
-                    ->required(),
+                  Forms\Components\FileUpload::make('signed_agreements')
+                    ->required()
+                    ->image()
+                    ->acceptedFileTypes([
+                      'image/png',
+                      'image/jpeg',
+                    ])
+                    ->maxSize(10240)
+                    ->directory('signed-agreements'),
                 ])
                 ->required(),
                 Forms\Components\TextInput::make('country_of_origin')
