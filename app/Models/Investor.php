@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +24,7 @@ class Investor extends Model
 
     protected $casts = [
       'projects_in_uzbekistan' => 'array', // JSON столбец будет автоматически преобразован в массив
-      'total_investment' => 'decimal:2', // Указывает, что значение должно быть преобразовано в десятичное с двумя знаками после запятой
+      'total_investment' => MoneyCast::class,
     ];
 
     public function activitySphere(): BelongsTo
