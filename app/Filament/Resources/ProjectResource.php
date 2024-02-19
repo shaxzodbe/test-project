@@ -36,7 +36,7 @@ class ProjectResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('estimated_cost')
                     ->required()
-                    ->prefix('~')
+                    ->prefix('$')
                     ->numeric(),
                 Forms\Components\Select::make('potential_investor_id')
                     ->relationship('potentialInvestor', 'full_name')
@@ -63,7 +63,7 @@ class ProjectResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('estimated_cost')
                     ->numeric()
-                    ->prefix('~')
+                    ->prefix('$')
                     ->sortable(),
                 TextColumn::make('potentialInvestor.full_name')
                     ->sortable(),
