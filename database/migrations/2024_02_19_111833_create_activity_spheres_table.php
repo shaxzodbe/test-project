@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('activity_spheres', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->timestamps();
         });
     }
