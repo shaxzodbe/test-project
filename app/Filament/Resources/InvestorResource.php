@@ -6,6 +6,8 @@ use App\Filament\Resources\InvestorResource\Pages;
 use App\Filament\Resources\InvestorResource\RelationManagers;
 use App\Models\Investor;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -29,11 +31,17 @@ class InvestorResource extends Resource
                 Forms\Components\TextInput::make('full_name')
                     ->required()
                     ->maxLength(255),
+              Repeater::make('projects_in_uzbekistan')
+                ->schema([
+                  TextInput::make('project_name')
+                    ->required(),
+                  TextInput::make('signed_agreements')
+                    ->required(),
+                ])
+                ->required(),
                 Forms\Components\TextInput::make('country_of_origin')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('projects_in_uzbekistan')
-                    ->required(),
                 Forms\Components\TextInput::make('total_investment')
                     ->required()
                     ->numeric(),
