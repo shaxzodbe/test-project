@@ -44,7 +44,8 @@ class InvestorResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('total_investment')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->prefix('$'),
                 Forms\Components\Textarea::make('company_contact_info')
                     ->required()
                     ->maxLength(65535)
@@ -68,6 +69,7 @@ class InvestorResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('total_investment')
                     ->numeric()
+                    ->prefix('$')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
