@@ -27,8 +27,8 @@ class Project extends Model
         return $this->belongsTo(Region::class);
     }
 
-    public function investor(): BelongsTo
+    public function potentialInvestor(): BelongsTo
     {
-        return $this->belongsTo(Investor::class);
+        return $this->belongsTo(Investor::class, 'potential_investor_id');
     }
 }

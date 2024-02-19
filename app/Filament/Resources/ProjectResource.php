@@ -6,9 +6,11 @@ use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Project;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -36,8 +38,9 @@ class ProjectResource extends Resource
                     ->required()
                     ->prefix('~')
                     ->numeric(),
-                Forms\Components\TextInput::make('potential_investor_id')
-                    ->numeric(),
+                Forms\Components\Select::make('potential_investor_id')
+                    ->relationship('potentialInvestor', 'full_name')
+                    ->nullable(),
                 Forms\Components\TextInput::make('responsible_person')
                     ->required()
                     ->maxLength(255),
@@ -62,8 +65,7 @@ class ProjectResource extends Resource
                     ->numeric()
                     ->prefix('~')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('potential_investor_id')
-                    ->numeric()
+                TextColumn::make('potentialInvestor.full_name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('responsible_person')
                     ->searchable(),
