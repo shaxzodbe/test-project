@@ -29,4 +29,16 @@ class Investor extends Model
     {
         return $this->belongsTo(ActivitySphere::class);
     }
+
+    // Аксессор
+    public function getProjectsInUzbekistanAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
+    // Мутатор
+    public function setProjectsInUzbekistanAttribute($value): void
+    {
+        $this->attributes['projects_in_uzbekistan'] = json_encode($value);
+    }
 }
