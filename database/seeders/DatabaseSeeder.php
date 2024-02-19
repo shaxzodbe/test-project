@@ -20,8 +20,11 @@ class DatabaseSeeder extends Seeder
           'email_verified_at' => now(),
         ]);
         User::factory(100)->create();
-        $this->call(RegionSeeder::class);
-        $this->call(ActivitySphereSeeder::class);
-        $this->call(InvestorSeeder::class);
+        $this->call([
+          RegionSeeder::class,
+          ActivitySphereSeeder::class,
+          InvestorSeeder::class,
+          EntrepreneurSeeder::class
+        ]);
     }
 }

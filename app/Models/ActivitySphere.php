@@ -16,4 +16,9 @@ class ActivitySphere extends Model
     {
         return $this->hasMany(Investor::class);
     }
+
+    public function entrepreneurs(): HasMany
+    {
+        return $this->hasMany(Entrepreneur::class);
+    }
 }
