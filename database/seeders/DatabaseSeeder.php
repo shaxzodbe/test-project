@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
           RegionSeeder::class,
           ActivitySphereSeeder::class,
           InvestorSeeder::class,
-          EntrepreneurSeeder::class
+          EntrepreneurSeeder::class,
+          ProjectSeeder::class
         ]);
     }
 }
