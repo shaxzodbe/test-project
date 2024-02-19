@@ -21,12 +21,12 @@ class InvestorFactory extends Factory
           'full_name' => $this->faker->name,
           'activity_sphere_id' => ActivitySphere::inRandomOrder()->first()->id, // Предполагается, что у вас уже есть записи в таблице activity_spheres
           'country_of_origin' => $this->faker->country,
-          'projects_in_uzbekistan' => json_encode([
+          'projects_in_uzbekistan' => [
             [
               'project_name' => $this->faker->words(3, true),
-              'signed_agreements' => $this->faker->imageUrl(), // Пример ссылки на изображение, надо использовать реальные пути к файлам или другую логику, если это необходимо
+              'signed_agreements' => $this->faker->imageUrl(),
             ]
-          ]),
+          ],
           'total_investment' => $this->faker->randomFloat(2, 100000, 10000000), // Сгенерирует десятичное число с двумя знаками после запятой в диапазоне от 100000 до 100000000
           'company_contact_info' => $this->faker->phoneNumber,
           'company_reference_list' => $this->faker->optional()->sentences(3, true), // Генерирует null или строку из трех предложений
