@@ -2,7 +2,9 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\Investor;
 use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Facades\DB;
 
 class CountriesChart extends ChartWidget
 {
@@ -10,14 +12,26 @@ class CountriesChart extends ChartWidget
 
     protected function getData(): array
     {
+        $investorsByCountry = Investor::query()
+          ->select('country_of_origin', DB::raw('count(*) as total'))
+          ->groupBy('country_of_origin')
+          ->pluck('total', 'country_of_origin');
+
+        // Преобразуем полученные данные для использования в графике
+        $labels = $investorsByCountry->keys()->toArray();
+        $data = $investorsByCountry->values()->toArray();
+
         return [
           'datasets' => [
             [
-              'label' => 'Blog posts created',
-              'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 89],
+              'label' => 'Number of Investors by Country',
+              'data' => $data,
+              'backgroundColor' => array_fill(0, count($data), 'rgba(54, 162, 235, 0.5)'),
+              'borderColor' => array_fill(0, count($data), 'rgba(54, 162, 235, 1)'),
+              'borderWidth' => 1,
             ],
           ],
-          'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          'labels' => $labels,
         ];
     }
 
