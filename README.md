@@ -1,58 +1,85 @@
+# Application Access Credentials
 
-## Test project in Laravel
+This section provides default credentials for accessing different parts of the application. Please ensure these credentials are changed in production environments to maintain security.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Admin Access
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The admin panel can be accessed at `yourdomain.com/admin`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **URL**: `yourdomain.com/admin`
+- **Email**: `admin@admin.com`
+- **Password**: `password`
 
-## Learning Laravel
+## User Access
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Standard user access for the application.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Email**: `user@user.com`
+- **Password**: `password`
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Note
 
-## Laravel Sponsors
+These credentials are provided for initial setup and testing purposes only. It's crucial to use strong, unique passwords and change the default credentials before deploying the application in a production environment.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+# Laravel Application Setup Guide
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+This README provides detailed instructions for deploying a Laravel application on a server with Apache as the web server and MySQL as the database. Follow these steps after ensuring your server has Apache, MySQL, PHP, and Composer installed.
 
-## Contributing
+## Prerequisites
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Apache Web Server**
+- **MySQL Database Server**
+- **PHP** (version required by your Laravel version, usually PHP >= 8.1)
+- **Composer** - PHP Dependency Manager
+- **NPM** - Front Dependency Manager
 
-## Code of Conduct
+## Step-by-Step Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Step 1: Clone the Repository
 
-## Security Vulnerabilities
+Clone your Laravel application repository onto your server by executing:
+```apacheconf
+git clone https://github.com/shaxzodbe/test-project
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Navigate to the application directory:
+```apacheconf
+cd /path/to/test-project
+```
 
-## License
+Install the required PHP packages using Composer:
+```apacheconf
+composer install --ignore-platform-reqs
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Install the required PHP packages using NPM:
+```apacheconf
+npm install
+```
+
+Copy the .env.example file to .env and update it with your specific settings, including database credentials:
+```apacheconf
+cp .env.example .env
+```
+
+Edit the .env file to configure your database connection:
+```apacheconf
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+```
+
+Generate a new Laravel application key:
+```apacheconf
+php artisan key:generate
+```
+
+Run the Laravel migrations with seeders to create your database schema:
+```apacheconf
+php artisan migrate:fresh --seed
+```
+
