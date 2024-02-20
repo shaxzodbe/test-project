@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Project;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -94,6 +95,11 @@ class ProjectResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                  Action::make('exportToPdf')
+                    ->label('Export to PDF')
+                    ->url(route('export', ['type' => 'projects']), true)
+                    ->icon('heroicon-o-folder-arrow-down')
+                    ->color('success'),
                 ]),
             ]);
     }

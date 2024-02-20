@@ -61,7 +61,7 @@ class ActivitySphereResource extends Resource
               Tables\Actions\DeleteBulkAction::make(),
               Action::make('exportToPdf')
                 ->label('Export to PDF')
-                ->url(route('activity-spheres.export', ['format' => 'pdf']))
+                ->url(route('export', ['type' => 'activity_spheres']), true)
                 ->icon('heroicon-o-folder-arrow-down')
                 ->color('success'),
             ]),

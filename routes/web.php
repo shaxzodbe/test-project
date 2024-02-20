@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin/activity-spheres/export/{format}', ExportController::class)->name('activity-spheres.export');
+Route::get('/admin/export/{type}', ExportController::class)
+  ->middleware('auth')
+  ->name('export');

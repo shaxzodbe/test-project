@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -85,6 +86,11 @@ class UserResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                  Action::make('exportToPdf')
+                    ->label('Export to PDF')
+                    ->url(route('export', ['type' => 'users']), true)
+                    ->icon('heroicon-o-folder-arrow-down')
+                    ->color('success'),
                 ]),
             ]);
     }

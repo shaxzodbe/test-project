@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PermissionResource\Pages;
 use App\Filament\Resources\PermissionResource\RelationManagers;
+use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -54,6 +55,11 @@ class PermissionResource extends Resource
           ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
               Tables\Actions\DeleteBulkAction::make(),
+              Action::make('exportToPdf')
+                ->label('Export to PDF')
+                ->url(route('export', ['type' => 'permissions']), true)
+                ->icon('heroicon-o-folder-arrow-down')
+                ->color('success'),
             ]),
           ]);
     }

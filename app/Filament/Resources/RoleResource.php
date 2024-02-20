@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RoleResource\Pages;
 use App\Filament\Resources\RoleResource\RelationManagers;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -59,6 +60,11 @@ class RoleResource extends Resource
           ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
               Tables\Actions\DeleteBulkAction::make(),
+              Action::make('exportToPdf')
+                ->label('Export to PDF')
+                ->url(route('export', ['type' => 'roles']), true)
+                ->icon('heroicon-o-folder-arrow-down')
+                ->color('success'),
             ]),
           ]);
     }

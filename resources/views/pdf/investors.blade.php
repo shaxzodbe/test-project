@@ -25,13 +25,17 @@
 </head>
 <body>
 <h1>{{ $title }}</h1>
-<p>This PDF document is generated using domPDF in Laravel and lists all activity spheres.</p>
+<p>This PDF document is generated using domPDF in Laravel and lists all {{ strtolower($title) }}.</p>
 
 <table>
   <thead>
   <tr>
     <th>ID</th>
-    <th>Title</th>
+    <th>Fullname</th>
+    <th>Activity sphere</th>
+    <th>Country of origin</th>
+    <th>Projects in Uzbekistan</th>
+    <th>Total investment</th>
     <th>Created At</th>
     <th>Updated At</th>
   </tr>
@@ -40,7 +44,19 @@
   @foreach ($data as $sphere)
     <tr>
       <td>{{ $sphere->id }}</td>
-      <td>{{ $sphere->title }}</td>
+      <td>{{ $sphere->full_name }}</td>
+      <td>{{ $sphere->activitySphere->title }}</td>
+      <td>{{ $sphere->country_of_origin }}</td>
+      <td>
+        @foreach($sphere->projects_in_uzbekistan as $project)
+          <li style="list-style: none;">
+            Project Name: {{ $project['project_name'] }}<br>
+            Signed Agreements:
+            <a href="{{ $project['signed_agreements'] }}" target="_blank">View Agreement</a>
+          </li>
+        @endforeach
+      </td>
+      <td>${{ $sphere->total_investment }}</td>
       <td>{{ $sphere->created_at->format('Y-m-d H:i:s') }}</td>
       <td>{{ $sphere->updated_at->format('Y-m-d H:i:s') }}</td>
     </tr>
