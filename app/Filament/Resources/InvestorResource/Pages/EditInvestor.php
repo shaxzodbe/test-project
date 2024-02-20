@@ -16,4 +16,9 @@ class EditInvestor extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Investor edited successfully!';
+    }
 }

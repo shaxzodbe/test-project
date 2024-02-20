@@ -16,4 +16,9 @@ class EditProject extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Project edited successfully!';
+    }
 }

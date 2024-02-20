@@ -14,4 +14,9 @@ class CreateProject extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Project created successfully!';
+    }
 }

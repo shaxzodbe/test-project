@@ -14,4 +14,9 @@ class CreateRegion extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Region created successfully!';
+    }
 }

@@ -14,4 +14,9 @@ class CreateEntrepreneur extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Entrepreneur created successfully!';
+    }
 }

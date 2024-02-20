@@ -16,4 +16,9 @@ class EditActivitySphere extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Activity sphere edited successfully!';
+    }
 }

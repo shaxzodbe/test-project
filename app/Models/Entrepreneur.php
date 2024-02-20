@@ -12,7 +12,9 @@ class Entrepreneur extends Model
 
     protected $fillable = [
       'full_name',
-      'company_contact_info'
+      'company_contact_info',
+      'activity_sphere_id',
+      'region_id'
     ];
 
     public function activitySphere(): BelongsTo
