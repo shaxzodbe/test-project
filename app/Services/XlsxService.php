@@ -2,7 +2,12 @@
 
 namespace App\Services;
 
-class XlsxService
-{
+use App\Contracts\Exportable;
 
+class XlsxService implements Exportable
+{
+    public function export($data)
+    {
+        return 14;
+    }
 }
