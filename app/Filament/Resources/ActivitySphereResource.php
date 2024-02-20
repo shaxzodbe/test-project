@@ -19,6 +19,8 @@ class ActivitySphereResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -49,6 +51,7 @@ class ActivitySphereResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -71,5 +74,10 @@ class ActivitySphereResource extends Resource
             'create' => Pages\CreateActivitySphere::route('/create'),
             'edit' => Pages\EditActivitySphere::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

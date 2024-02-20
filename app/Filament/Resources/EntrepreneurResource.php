@@ -19,6 +19,8 @@ class EntrepreneurResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-swatch';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -65,6 +67,7 @@ class EntrepreneurResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -87,5 +90,10 @@ class EntrepreneurResource extends Resource
             'create' => Pages\CreateEntrepreneur::route('/create'),
             'edit' => Pages\EditEntrepreneur::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
