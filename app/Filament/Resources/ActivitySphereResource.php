@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ActivitySphereResource\Pages;
 use App\Filament\Resources\ActivitySphereResource\RelationManagers;
 use App\Models\ActivitySphere;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,40 +27,45 @@ class ActivitySphereResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-            ]);
+          ->schema([
+            Forms\Components\TextInput::make('title')
+              ->required()
+              ->maxLength(255),
+          ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+          ->columns([
+            Tables\Columns\TextColumn::make('title')
+              ->searchable(),
+            Tables\Columns\TextColumn::make('created_at')
+              ->dateTime()
+              ->sortable()
+              ->toggleable(isToggledHiddenByDefault: true),
+            Tables\Columns\TextColumn::make('updated_at')
+              ->dateTime()
+              ->sortable()
+              ->toggleable(isToggledHiddenByDefault: true),
+          ])
+          ->filters([
+              //
+          ])
+          ->actions([
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
+          ])
+          ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+              Tables\Actions\DeleteBulkAction::make(),
+              Action::make('exportToPdf')
+                ->label('Export to PDF')
+                ->url(route('activity-spheres.export', ['format' => 'pdf']))
+                ->icon('heroicon-o-folder-arrow-down')
+                ->color('success'),
+            ]),
+          ]);
     }
 
     public static function getRelations(): array
@@ -72,9 +78,9 @@ class ActivitySphereResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListActivitySpheres::route('/'),
-            'create' => Pages\CreateActivitySphere::route('/create'),
-            'edit' => Pages\EditActivitySphere::route('/{record}/edit'),
+          'index' => Pages\ListActivitySpheres::route('/'),
+          'create' => Pages\CreateActivitySphere::route('/create'),
+          'edit' => Pages\EditActivitySphere::route('/{record}/edit'),
         ];
     }
 
