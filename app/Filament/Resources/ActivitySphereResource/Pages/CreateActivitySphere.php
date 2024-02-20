@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateActivitySphere extends CreateRecord
 {
     protected static string $resource = ActivitySphereResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

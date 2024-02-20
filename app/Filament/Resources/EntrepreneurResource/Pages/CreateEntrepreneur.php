@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateEntrepreneur extends CreateRecord
 {
     protected static string $resource = EntrepreneurResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
