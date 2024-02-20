@@ -13,25 +13,28 @@ class RegionsChart extends ChartWidget
     protected function getData(): array
     {
         // Получаем количество проектов в каждом регионе
-        $projectsCount = Project::query()
-          ->select('region_id', DB::raw('count(*) as total'))
-          ->groupBy('region_id')
-          ->pluck('total', 'region_id')
-          ->all();
+        $regionsData = Project::query()
+          ->join('regions', 'projects.region_id', '=', 'regions.id')
+          ->select('regions.title', DB::raw('count(*) as total'))
+          ->groupBy('regions.title')
+          ->get()
+          ->mapWithKeys(function ($item) {
+              return [$item['title'] => $item['total']];
+          })
+          ->toArray();
 
-        // Подготовка данных для графика
-        $labels = array_keys($projectsCount);
-        $values = array_values($projectsCount);
+        $labels = array_keys($regionsData);
+        $values = array_values($regionsData);
 
         return [
           'labels' => $labels,
           'datasets' => [
             [
-              'label' => 'Projects Count',
+              'label' => 'Project count in Regions',
               'data' => $values,
               'backgroundColor' => 'rgba(54, 162, 235, 0.5)',
               'borderColor' => 'rgba(54, 162, 235, 1)',
-              'borderWidth' => 1,
+              'fill' => true,
             ],
           ],
         ];
