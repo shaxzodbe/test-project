@@ -14,24 +14,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::factory()->create([
-          'name' => 'Admin',
-          'email' => 'admin@admin.com',
-        ]);
-        User::factory()->create([
-          'name' => 'User',
-          'email' => 'user@user.com',
-        ]);
-        $role = Role::create(['name' => 'Admin']);
-        $admin->assignRole($role);
-
-        User::factory(100)->create();
         $this->call([
           RegionSeeder::class,
           ActivitySphereSeeder::class,
           InvestorSeeder::class,
           EntrepreneurSeeder::class,
-          ProjectSeeder::class
+          ProjectSeeder::class,
+          RolesAndPermissionsSeeder::class
         ]);
+
+        User::factory()->create([
+          'name' => 'Admin',
+          'email' => 'admin@admin.com',
+        ])->assignRole('admin');
+        User::factory()->create([
+          'name' => 'User',
+          'email' => 'user@user.com',
+        ])->assignRole('user');
+
+        User::factory(100)->create()->each(function ($user) {
+            // Проверка, чтобы не назначать роль администратора случайным пользователям
+            $user->assignRole('user');
+        });
     }
 }

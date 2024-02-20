@@ -6,13 +6,16 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
@@ -41,6 +44,14 @@ class UserResource extends Resource
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (Page $livewire) => ($livewire instanceof Pages\CreateUser))
                     ->maxLength(255),
+              Forms\Components\Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')
+                    ->preload(),
+              Forms\Components\Select::make('permissions')
+                ->multiple()
+                ->relationship('permissions', 'name')
+                ->preload()
             ]);
     }
 
@@ -97,5 +108,34 @@ class UserResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->can('read users');
+    }
+
+    // Определение, кто может создавать пользователей
+    public static function canCreate(): bool
+    {
+        return Auth::user()->can('create users');
+    }
+
+    // Определение, кто может просматривать детали пользователя
+    public static function canView(Model $record): bool
+    {
+        return Auth::user()->can('read users');
+    }
+
+    // Определение, кто может редактировать пользователей
+    public static function canEdit(Model $record): bool
+    {
+        return Auth::user()->can('update users');
+    }
+
+    // Определение, кто может удалять пользователей
+    public static function canDelete(Model $record): bool
+    {
+        return Auth::user()->can('delete users');
     }
 }
